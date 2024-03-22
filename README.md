@@ -49,7 +49,23 @@ membentuk respon http dengan format, status http, panjang content, dan isi conte
 ![ss_comimt_2](https://github.com/tiffanyadisuryo/advprog-module6/assets/119838581/c6c6130a-86eb-444e-a77e-ac9145fce970)
 
 Sehingga pada akhirnya memunculkan tulisan dari file hello.html pada link tersebut seperti gambar di atas.
+<br><br>
 
+## Commit 3 Reflection Notes
+```rust
+let request_line = buf_reader.lines().next().unwrap().unwrap();
+```
+line ini bertujuan untuk mendapat request line agar nantinya dapat diidentifikasi apakah ditemukan atau tidak alamatnya.
+<br><br>
 
+```rust
+    let (status_line, filename) = if request_line == "GET / HTTP/1.1" {
+        ("HTTP/1.1 200 OK", "hello.html")
+    } else {
+        ("HTTP/1.1 404 NOT FOUND", "404.html")
+    };
+```
+setelah didapat request line dari kode di atas, maka langsung diidentifikasi masuk ke yang sukses atau not found, dari situ dilanjutkan kepada file html-nya masing-masing.
+<br><br>
 
 
