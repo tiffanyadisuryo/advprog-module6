@@ -46,7 +46,9 @@ let response = format!("{status_line}\r\nContent-Length:{length}\r\n\r\n{content
 membentuk respon http dengan format, status http, panjang content, dan isi content itu sendiri dari kode di atasnya.
 <br><br>
 
+![ss_comimt_2](https://github.com/tiffanyadisuryo/advprog-module6/assets/119838581/c6c6130a-86eb-444e-a77e-ac9145fce970)
 
+Sehingga pada akhirnya memunculkan tulisan dari file hello.html pada link tersebut seperti gambar di atas.
 
 
 
