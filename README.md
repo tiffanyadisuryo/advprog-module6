@@ -68,6 +68,9 @@ line ini bertujuan untuk mendapat request line agar nantinya dapat diidentifikas
 setelah didapat request line dari kode di atas, maka langsung diidentifikasi masuk ke yang sukses atau not found, dari situ dilanjutkan kepada file html-nya masing-masing.
 <br><br>
 
+![ss_comimt_3](https://github.com/tiffanyadisuryo/advprog-module6/assets/119838581/9824fa51-5aa6-4055-b658-1857ff5f66bd)
+Maka hasilnya akan menjadi seperti berikut.
+<br><br>
 
 ### Commit 4 Reflection Notes
 ```rust
