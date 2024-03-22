@@ -69,3 +69,9 @@ setelah didapat request line dari kode di atas, maka langsung diidentifikasi mas
 <br><br>
 
 
+### Commit 4 Reflection Notes
+```rust
+thread::sleep(Duration::from_secs(10))
+```
+line tersebut menyebabkan tiap kali masuk route /sleep akan delay selama 10 detik sebelum response terkirim. Ini dilakukan untuk melihat bagaimana system dapat handle respon yang lambat.
+<br><br>
