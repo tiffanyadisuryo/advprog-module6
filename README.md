@@ -33,5 +33,21 @@ line ini membaca setiap line pada buf_reader.
 print hasil http_request 
 <br><br>
 
+## Commit 2 Reflection Notes
+```rust
+let contents = fs::read_to_string("hello.html").unwrap();
+```
+membaca setiap isi dari hello.html dan melakukan ekstraksi ke bentuk string
+<br><br>
+
+```rust
+let response = format!("{status_line}\r\nContent-Length:{length}\r\n\r\n{contents}");
+```
+membentuk respon http dengan format, status http, panjang content, dan isi content itu sendiri dari kode di atasnya.
+<br><br>
+
+
+
+
 
 
