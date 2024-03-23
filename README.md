@@ -78,3 +78,6 @@ thread::sleep(Duration::from_secs(10))
 ```
 line tersebut menyebabkan tiap kali masuk route /sleep akan delay selama 10 detik sebelum response terkirim. Ini dilakukan untuk melihat bagaimana system dapat handle respon yang lambat.
 <br><br>
+
+### Commit 5 Reflection Notes
+Threadpool adalah kumpulan thread yang telah dibuat sebelumnya. Ini dilakukan agar saat dibutuhkan thread yang banyak, tinggal menggunakan yang sudah ada di threadpool. Pembuatan thread pool dimulai dari kode ```ThreadPool::new(size)``` dimana size menandakan jumlah worker threads yang diinginkan pada pool. Channel  ```mpsc::channel``` dibuat untuk menjalin komunikasi antar main thread dengan worker thread yang lain. Receiver end dari channel di-wrapped dengan ```Arc<Mutex<mpsc::Receiver<Job>>>``` agar concurrent dapat dilakukan antar main thread dan worker thread. 'Job'yang akan dilakukan oleh thread dikirim ke sender dari channel menggunakan ```sender.as_ref().unwrap().send(job)```. Worker akan terus mencoba mengambil job dengan loop. Saat job dilakukan dengan sukses maka akan print message. 
