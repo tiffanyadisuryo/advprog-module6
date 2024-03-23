@@ -72,12 +72,15 @@ setelah didapat request line dari kode di atas, maka langsung diidentifikasi mas
 Maka hasilnya akan menjadi seperti berikut.
 <br><br>
 
-### Commit 4 Reflection Notes
+## Commit 4 Reflection Notes
 ```rust
 thread::sleep(Duration::from_secs(10))
 ```
 line tersebut menyebabkan tiap kali masuk route /sleep akan delay selama 10 detik sebelum response terkirim. Ini dikarenakan cuma ada 1 thread dan satu-satunya thread itu diberhentikan bselama 10 detik. Maka tentunya user cuma bisa mengandalkan 1 thread itu. Ini dilakukan untuk melihat bagaimana system dapat handle respon yang lambat. Tentunya dalam kasus ini terlihat bahwa saat satu thread ini sleep, maka tidak ada pilihan lainnya. Makanya sebaiknya menggunakan concurrency agar lebih efisien.
 <br><br>
 
-### Commit 5 Reflection Notes
+## Commit 5 Reflection Notes
 Threadpool adalah kumpulan thread yang telah dibuat sebelumnya. Ini dilakukan agar saat dibutuhkan thread yang banyak, tinggal menggunakan yang sudah ada di threadpool. Pembuatan thread pool dimulai dari kode ```ThreadPool::new(size)``` dimana size menandakan jumlah worker threads yang diinginkan pada pool. Channel  ```mpsc::channel``` dibuat untuk menjalin komunikasi antar main thread dengan worker thread yang lain. Receiver end dari channel di-wrapped dengan ```Arc<Mutex<mpsc::Receiver<Job>>>``` agar concurrent dapat dilakukan antar main thread dan worker thread. 'Job'yang akan dilakukan oleh thread dikirim ke sender dari channel menggunakan ```sender.as_ref().unwrap().send(job)```. Worker akan terus mencoba mengambil job dengan loop. Saat job dilakukan dengan sukses maka akan print message. 
+
+## Commit Bonus Reflection notes
+Saya mengimplementasikan kode yang mirip pada 13-3. Jadi build-nya mengembangkan bagian input-output. Jika sebelumnya dengan new, jika tidak ditemukan thread maka akan panic. Sekarang, saat thread tidak dibuat maka tidak akan panic, dan akan memunculkan error. Saya menggunakan PoolCreationError. Isi dari PoolCreationError adalah string errornya.

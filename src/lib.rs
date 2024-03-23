@@ -8,16 +8,30 @@ pub struct ThreadPool {
     sender: Option<mpsc::Sender<Job>>,
 }
 
+#[derive(Debug)]
+pub struct PoolCreationError(String);
+
 type Job = Box<dyn FnOnce() + Send + 'static>;
 
 impl ThreadPool {
-    /// Create a new ThreadPool.
-    ///
-    /// The size is the number of threads in the pool.
-    ///
-    /// # Panics
-    ///
-    /// The `new` function will panic if the size is zero.
+    pub fn build(size: usize) -> Result<ThreadPool, PoolCreationError> {
+        if size == 0{
+            return Err(PoolCreationError(String::from("Pool size cannot be zero")))
+        }
+
+        let (sender, receiver) = mpsc::channel();
+
+        let receiver = Arc::new(Mutex::new(receiver));
+
+        let mut workers = Vec::with_capacity(size);
+
+        for id in 0..size {
+            workers.push(Worker::new(id, Arc::clone(&receiver)));
+        }
+
+        Ok(ThreadPool { workers, sender: Some(sender) })
+    }
+
     pub fn new(size: usize) -> ThreadPool {
         assert!(size > 0);
 
@@ -40,7 +54,7 @@ impl ThreadPool {
     {
         let job = Box::new(f);
 
-        self.sender.as_ref().unwrap().send(job).unwrap();
+        self.sender.as_ref().expect("REASON").send(job).unwrap();
     }
 }
 
